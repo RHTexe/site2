@@ -14,7 +14,7 @@ socket.emit('joinRoom', { roomId, name: displayName });
 
 socket.on('roomJoined', ({ you, state }) => {
   isHost = you.isHost;
-  if(isHost) document.getElementById('hostBadge').classList.remove('hidden');
+  updateHostUI();
   updateUserList(state.users);
   if(state.videoId) loadVideoById(state.videoId, state.playbackTime);
 });
@@ -23,9 +23,20 @@ socket.on('userJoined', ({ id, name, isHost: h }) => updateUserListDisplay());
 socket.on('userLeft', ({ id }) => updateUserListDisplay());
 socket.on('hostChanged', ({ id }) => {
   isHost = id === socket.id;
-  if(isHost) document.getElementById('hostBadge').classList.remove('hidden');
-  else document.getElementById('hostBadge').classList.add('hidden');
+  updateHostUI();
 });
+
+function updateHostUI(){
+  const badge = document.getElementById('hostBadge');
+  const buttons = document.querySelectorAll('#btnLoad, #btnPlay, #btnPause, #btnSeekBack, #btnSeekFwd');
+  if(isHost){
+    badge.classList.remove('hidden');
+    buttons.forEach(b=>b.disabled=false);
+  } else {
+    badge.classList.add('hidden');
+    buttons.forEach(b=>b.disabled=true);
+  }
+}
 
 function updateUserList(users){
   const ul = document.getElementById('userList');
