@@ -7,10 +7,15 @@ const path = require('path');
 
 const app = express();
 
-// Statik frontend dosyaları
+// Frontend dosyalarını sun
 app.use(express.static(path.join(__dirname, 'frontend')));
 
-// API ve health check
+// Anasayfa
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
+
+// Health check
 app.get('/health', (req, res) => res.json({ ok: true }));
 
 const server = http.createServer(app);
@@ -97,4 +102,4 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => console.log(`Backend listening on :${PORT}`));
+server.listen(PORT, () => console.log(`Server running on :${PORT}`));
