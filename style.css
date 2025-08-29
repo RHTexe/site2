@@ -1,11 +1,13 @@
-body { margin:0; font-family:sans-serif; background:#121520; color:#fff; }
-.container { max-width:1200px; margin:0 auto; padding:16px; }
-header { display:flex; gap:8px; align-items:center; }
-input, button { padding:8px; border-radius:6px; border:none; }
-button { background:#5865f2; color:white; cursor:pointer; }
-#player { width:100%; aspect-ratio:16/9; background:#0b0e14; margin-top:12px; }
-main { display:flex; gap:16px; margin-top:16px; }
-.left { flex:2; }
-.right { flex:1; display:flex; flex-direction:column; gap:8px; }
-#chatLog { height:300px; overflow:auto; background:#222; padding:8px; border-radius:6px; }
-#userList { list-style:none; padding:0; }
+body{margin:0;font-family:sans-serif;background:#121520;color:#fff;}
+.container{max-width:1200px;margin:0 auto;padding:16px;}
+header{display:flex;justify-content:space-between;align-items:center;}
+.left{flex:2; display:flex; flex-direction:column; gap:8px;}
+.right{flex:1; display:flex; flex-direction:column; gap:8px;}
+main{display:flex; gap:16px; margin-top:16px;}
+#player{width:100%;aspect-ratio:16/9;background:#0b0e14; border-radius:10px;}
+button{padding:6px 10px;border:none;border-radius:6px;background:#5865f2;color:white;cursor:pointer;}
+button:disabled{opacity:0.5; cursor:not-allowed;}
+.hidden{display:none;}
+.video-controls{display:flex; gap:8px; margin-top:6px;}
+#chatLog{height:250px; overflow:auto; background:#222; padding:8px; border-radius:6px;}
+#userList{list-style:none;padding:0;}

@@ -1,46 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Watch2Gether Lite</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
-  <script src="https://www.youtube.com/iframe_api"></script>
-  <script>
-    window.BACKEND_URL = location.origin;
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watch2Gether Lite</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Watch2G Lite (2 kişi)</h1>
-      <input id="roomId" placeholder="Oda ID" />
-      <input id="displayName" placeholder="İsminiz" />
-      <button id="btnJoin">Katıl</button>
-      <span id="status"></span>
-    </header>
+<div class="container">
+  <header>
+    <h1>Watch2Gether Lite</h1>
+    <div class="room-info">
+      <span id="roomDisplay"></span>
+      <span id="hostBadge" class="hidden">HOST</span>
+    </div>
+  </header>
 
-    <main>
-      <section class="left">
-        <input id="videoId" placeholder="YouTube Video ID" />
-        <button id="btnLoad">Yükle</button>
-        <button id="btnPlay">▶︎ Oynat</button>
+  <main>
+    <section class="left">
+      <input id="videoUrl" placeholder="YouTube Video URL girin..." />
+      <button id="btnLoad">Videoyu Yükle</button>
+      <div id="player"></div>
+      <div class="video-controls">
+        <button id="btnPlay">▶ Oynat</button>
         <button id="btnPause">⏸ Durdur</button>
         <button id="btnSeekBack">⏪ -5s</button>
         <button id="btnSeekFwd">⏩ +5s</button>
-        <div id="player"></div>
-      </section>
+      </div>
+    </section>
 
-      <aside class="right">
+    <aside class="right">
+      <div class="users">
+        <h3>Kullanıcılar</h3>
         <ul id="userList"></ul>
+      </div>
+      <div class="chat">
+        <h3>Sohbet</h3>
         <div id="chatLog"></div>
         <input id="chatText" placeholder="Mesaj yaz..." />
         <button id="btnSend">Gönder</button>
-      </aside>
-    </main>
-  </div>
+      </div>
+    </aside>
+  </main>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
