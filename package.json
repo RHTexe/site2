@@ -1,5 +1,5 @@
 {
-  "name": "watch2gether-lite-backend",
+  "name": "watch2gether-lite",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {

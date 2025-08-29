@@ -3,18 +3,19 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
-app.use(cors());
 
+// Statik frontend dosyaları
+app.use(express.static(path.join(__dirname, 'frontend')));
+
+// API ve health check
 app.get('/health', (req, res) => res.json({ ok: true }));
 
 const server = http.createServer(app);
-const io = new Server(server, {
-  cors: { origin: "*" }
-});
+const io = new Server(server, { cors: { origin: "*" } });
 
-// Oda durumu
 const rooms = {};
 
 function getRoomState(roomId) {
@@ -28,15 +29,14 @@ function getRoomState(roomId) {
   };
 }
 
+// Socket.IO
 io.on('connection', (socket) => {
   let joinedRoom = null;
 
   socket.on('joinRoom', ({ roomId, name }) => {
     if (!roomId || !name) return socket.emit('errorMsg', 'Eksik oda veya isim.');
-
     if (!rooms[roomId]) rooms[roomId] = { users: new Map(), videoId: null, isPlaying: false, playbackTime: 0 };
     const room = rooms[roomId];
-
     if (room.users.size >= 2) return socket.emit('roomFull');
 
     const isHost = room.users.size === 0;
@@ -54,13 +54,9 @@ io.on('connection', (socket) => {
   });
 
   socket.on('loadVideo', ({ roomId, videoId, time = 0 }) => {
-    const room = rooms[roomId];
-    if (!room) return;
-    const user = room.users.get(socket.id);
-    if (!user || !user.isHost) return;
-    room.videoId = videoId;
-    room.playbackTime = time;
-    room.isPlaying = false;
+    const room = rooms[roomId]; if (!room) return;
+    const user = room.users.get(socket.id); if (!user || !user.isHost) return;
+    room.videoId = videoId; room.playbackTime = time; room.isPlaying = false;
     io.to(roomId).emit('loadVideo', { videoId, time });
   });
 
