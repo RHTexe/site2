@@ -1,4 +1,5 @@
-const WS_URL = "https://site-cndn.onrender.com/"; // backend url
+const WS_URL = "https://site2-y94d.onrender.com";
+
 const socket = io(WS_URL);
 
 let player, currentRoom='', displayName='', isHost=false;
