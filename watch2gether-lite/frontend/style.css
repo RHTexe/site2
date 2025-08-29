@@ -1,0 +1,15 @@
+* { box-sizing:border-box; margin:0; padding:0; font-family:system-ui; }
+body { background:#0f1115; color:#e8e8ea; }
+.container { max-width:1200px; margin:0 auto; padding:16px; }
+header { display:flex; justify-content:space-between; align-items:center; }
+.room-controls input { padding:6px; border-radius:8px; border:1px solid #333; background:#151821; color:#fff; }
+button { padding:6px 12px; border-radius:10px; border:none; background:#5865f2; color:#fff; cursor:pointer; }
+main { display:grid; grid-template-columns:2fr 1fr; gap:16px; margin-top:16px; }
+.left { background:#121520; padding:12px; border-radius:16px; }
+.right { display:grid; gap:16px; }
+#player { width:100%; aspect-ratio:16/9; background:#0b0e14; border-radius:12px; }
+.video-controls { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+.badge { padding:4px 8px; border-radius:999px; background:#23a55a; font-size:12px; }
+.hidden { display:none; }
+#userList { list-style:none; }
+#chatLog { height:300px; overflow:auto; border:1px solid #222; border-radius:8px; padding:6px; margin-bottom:6px; }
